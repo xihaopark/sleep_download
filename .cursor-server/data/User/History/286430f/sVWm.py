@@ -60,31 +60,6 @@ class SleepDataWgetManager:
         print(f"🚀 睡眠数据管理器 (Wget版) 初始化完成")
         print(f"🔐 用户: {self.username}")
 
-    def get_valid_token(self):
-        """获取有效的Dropbox token"""
-        try:
-            # 尝试使用token管理器
-            from token_manager import MultiServerTokenManager
-            manager = MultiServerTokenManager()
-            token_data = manager.get_current_token()
-            
-            if token_data:
-                return token_data['access_token']
-            else:
-                print("⚠️  Token管理器未找到有效token，尝试从配置文件读取...")
-                # 备用方案：从配置文件读取
-                from dropbox_config import DROPBOX_CONFIG
-                return DROPBOX_CONFIG['access_token']
-                
-        except Exception as e:
-            print(f"⚠️  Token管理器加载失败: {e}")
-            try:
-                # 备用方案：从配置文件读取
-                from dropbox_config import DROPBOX_CONFIG
-                return DROPBOX_CONFIG['access_token']
-            except:
-                return None
-
     def load_existing_state(self):
         """加载现有状态"""
         downloaded = set()
