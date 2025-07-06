@@ -51,10 +51,16 @@ sleep 3
 
 # 验证进程状态
 echo "✅ 验证进程状态..."
-if ps -p $MAIN_PID > /dev/null; then
-    echo "✅ Wget管理器运行中 (PID: $MAIN_PID)"
+if ps -p $DOWNLOAD_PID > /dev/null; then
+    echo "✅ 下载管理器运行中 (PID: $DOWNLOAD_PID)"
 else
-    echo "❌ Wget管理器启动失败"
+    echo "❌ 下载管理器启动失败"
+fi
+
+if ps -p $UPLOAD_PID > /dev/null; then
+    echo "✅ 上传管理器运行中 (PID: $UPLOAD_PID)"
+else
+    echo "❌ 上传管理器启动失败"
 fi
 
 # 显示状态信息
@@ -64,7 +70,8 @@ echo "🎉 启动完成！"
 echo "======================================================================="
 echo ""
 echo "📊 当前状态:"
-echo "- Wget管理器: PID $MAIN_PID"
+echo "- 下载进程: PID $DOWNLOAD_PID"
+echo "- 上传进程: PID $UPLOAD_PID"
 echo "- 下载目录: $(ls -1 download 2>/dev/null | wc -l) 个文件"
 echo "- 磁盘使用: $(df -h . | tail -1 | awk '{print $5}')"
 echo "- 待下载: $(wc -l < list.txt) 个链接"

@@ -36,22 +36,31 @@ case "$1" in
         
     stop)
         echo "🛑 停止所有进程..."
-        pkill -f sleep_data_wget_manager && echo "✅ 停止Wget管理器" || echo "⚠️  Wget管理器未运行"
+        pkill -f sleep_data_manager && echo "✅ 停止下载管理器" || echo "⚠️  下载管理器未运行"
+        pkill -f auto_upload_manager && echo "✅ 停止上传管理器" || echo "⚠️  上传管理器未运行"
         echo "✅ 所有进程已停止"
         ;;
         
     start)
-        echo "🚀 启动Wget管理器..."
+        echo "🚀 启动多进程系统..."
         
         # 创建日志目录
         mkdir -p logs
         
-        # 启动wget管理器
-        if ! pgrep -f sleep_data_wget_manager > /dev/null; then
-            nohup python3 sleep_data_wget_manager.py > logs/wget_manager.log 2>&1 &
-            echo "✅ 启动Wget管理器 (PID: $!)"
+        # 启动下载管理器
+        if ! pgrep -f sleep_data_manager > /dev/null; then
+            nohup python3 sleep_data_manager.py > logs/download_manager.log 2>&1 &
+            echo "✅ 启动下载管理器 (PID: $!)"
         else
-            echo "⚠️  Wget管理器已在运行"
+            echo "⚠️  下载管理器已在运行"
+        fi
+        
+        # 启动上传管理器
+        if ! pgrep -f auto_upload_manager > /dev/null; then
+            nohup python3 auto_upload_manager.py > logs/upload_manager.log 2>&1 &
+            echo "✅ 启动上传管理器 (PID: $!)"
+        else
+            echo "⚠️  上传管理器已在运行"
         fi
         
         sleep 2
@@ -70,10 +79,16 @@ case "$1" in
         echo "📄 系统日志"
         echo "======================================================================="
         
-        if [ -f "logs/wget_manager.log" ]; then
+        if [ -f "logs/download_manager.log" ]; then
             echo ""
-            echo "=== Wget管理器日志 (最后20行) ==="
-            tail -20 logs/wget_manager.log
+            echo "=== 下载管理器日志 (最后20行) ==="
+            tail -20 logs/download_manager.log
+        fi
+        
+        if [ -f "logs/upload_manager.log" ]; then
+            echo ""
+            echo "=== 上传管理器日志 (最后20行) ==="
+            tail -20 logs/upload_manager.log
         fi
         ;;
         
@@ -84,10 +99,16 @@ case "$1" in
         find download -type f -size 0 -delete 2>/dev/null && echo "✅ 清理了空文件" || true
         
         # 清理旧日志
-        if [ -f "logs/wget_manager.log" ]; then
-            tail -1000 logs/wget_manager.log > logs/wget_manager.log.tmp
-            mv logs/wget_manager.log.tmp logs/wget_manager.log
-            echo "✅ 清理了Wget管理器日志"
+        if [ -f "logs/download_manager.log" ]; then
+            tail -1000 logs/download_manager.log > logs/download_manager.log.tmp
+            mv logs/download_manager.log.tmp logs/download_manager.log
+            echo "✅ 清理了下载日志"
+        fi
+        
+        if [ -f "logs/upload_manager.log" ]; then
+            tail -1000 logs/upload_manager.log > logs/upload_manager.log.tmp
+            mv logs/upload_manager.log.tmp logs/upload_manager.log
+            echo "✅ 清理了上传日志"
         fi
         
         echo "✅ 清理完成"

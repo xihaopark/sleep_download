@@ -12,7 +12,7 @@ DROPBOX_CONFIG = {
 
 # PhysioNet登录信息（如果需要认证下载）
 PHYSIONET_CONFIG = {
-    'username': 'chenzcha',
+    'username': 'xihaopark',  # 请确认用户名
     'password': '97HU15lWcE'
 }
 

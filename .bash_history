@@ -1598,3 +1598,7 @@ python3 auto_upload_manager.py &
 python3 sleep_data_manager.py &
 . "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
 python3 sleep_data_manager_auth.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+tail -f logs/download_manager.log
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+./manage.sh monitor
