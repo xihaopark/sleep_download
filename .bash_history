@@ -1501,3 +1501,39 @@ git push -u origin main
 git log --oneline
 python3 sleep_data_manager_auth.py
 python3 sleep_data_manager_auth.py 
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 test_dropbox_token.py
+pip3 install dropbox
+python3 test_dropbox_token.py
+python3 get_new_token.py
+python3 update_all_tokens.py
+python3 test_updated_token.py
+python3 prepare_for_github.py
+git init
+git add .
+git commit -m "feat: PhysioNet Sleep Data Download Manager v2.0
+
+- 🔄 自动下载PhysioNet睡眠数据文件
+- ☁️ 自动上传到Dropbox云存储
+- 💾 智能本地存储空间管理
+- 🔐 支持长期有效的Dropbox token
+- 📊 详细的下载和上传进度跟踪
+- 📝 完整的错误处理和日志记录
+
+主要文件:
+- sleep_data_manager.py: 基础下载管理器
+- sleep_data_manager_auth.py: 带认证的高级版本
+- auto_upload_manager.py: 自动上传管理器
+- dropbox_auth_helper.py: Dropbox认证助手
+
+更新内容:
+- 使用OAuth2获取长期有效token
+- 改进错误处理和重试机制
+- 添加智能空间管理
+- 完善文档和配置模板"
+git config --global user.name "Park XiHao" && git config --global user.email "xihaopark@gmail.com"
+git remote -v
+git push origin main
+ls -la *.txt | grep -E "(group|download|url)"
+find . -name "*group*" -o -name "*url*" -o -name "*link*" | head -10
+python3 sleep_data_manager.py
