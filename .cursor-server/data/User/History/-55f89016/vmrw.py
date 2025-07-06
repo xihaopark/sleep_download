@@ -161,20 +161,10 @@ class SleepDataUploader:
         return uploaded_count, total_freed
 
 if __name__ == "__main__":
-    try:
-        # 从配置文件读取token
-        from dropbox_config import DROPBOX_CONFIG
-        token = DROPBOX_CONFIG['access_token']
-        
-        uploader = SleepDataUploader(token)
-        
-        # 继续上传剩余文件
-        uploader.auto_upload_batch(batch_size=5)
-        
-    except ImportError:
-        print("❌ 未找到 dropbox_config.py 配置文件")
-        print("请先运行: cp sensitive_config_template.py dropbox_config.py")
-        sys.exit(1)
-    except Exception as e:
-        print(f"❌ 启动失败: {e}")
-        sys.exit(1)
+    # 使用你的令牌
+    token = "sl.u.AF34PeTlpglqeAYwABIYfeD3-SyW3tTUqkcjG_o5ffO0YJ9nT_G2pd1wHYFRqqv7z0-LFZ6jg6soFpe3KCUNDqulVlMPIWG-Mf80Jvbw72x6S9NJV-5-0IbRcXFeG7ktJWGjMFs5ynvdoFkJtzAZ9cMS3nvKk9Poqg-APtUA7IciNIDS3xa17WBDpBMg33z4Qm2FRaVgcNtu9OZ23zS7s0aNxX-SaKcWtElePah0seAESpGhHgtKTmnSOK3pt0gs5W0PqcmPw8p0y_euTs6_BGkQvieK_WdCzaOVP8Cs0dl1ep7IIYilmlEHw1HoXHstC-4oQJsIf7UFBaPNufbushoXDPftGh7wsFiW2x2c62fKDk1PtKh5B2MW2k1ZcMMK6QHom9bdFtagQ9mFSZV85stQkmNgXY2fMGaKbiMSLaNsv0BKYijWT6SEbQHAZSai6yMNn2rfWkVu_WjvaQrqTVme0WCtvNq_vhtkidxvLGQ1zDVqz-7b_JVhAGgg8gdzUk0DUUHq-HRKsg9WIgXmnn28j6exYVYqBxPxdAkL_m953kWKZKSIqcERKkjd-z7OP6VV-gdP0abDHFg8KnhZNJJufC_MG0Va1e_m4FAzMGVmNWO5Io9abHOrvDc2RyHyegVc-KZoeLZCwcov1JOhad1sPuJwvCTKDNqTNLhfLArlYYgbAygRhEI0VWNYDUnEgwov3cCcFqAPKWhGrcCQvdphhDy0AXht6-_DSqR1H36OrNfOkyypxTJzWLJ_GMh7U0M58grI0lpW5ecA0PcIy0U6Vze_Io29c8V4lZhNSSibtUevKyUa_Cg6-ay-xBiCBSPhbnc840-n-jPiK0manr55ruct-_tsFMuBtoa5S4UvDVdhuq2iT770DBmeriJDWrtfKdnc7ZxKUk_Wh18kMFyM995igTxyLuejytQhAUhbuWiMlTHik01m2382_H_yOwwpZ-wU0-EXp7_VatSEPJWPSAO3MJgCuc8y8Fdnk10MY6BzKc3EpbIbJtnIzTsxLiLu2aWklgzwuGkt_HsolNKgKTYEpqYvdT8gWZBBKUl9p9ETqP_lEkGfQ6j1RdXsSvtMiWJGl7xje6g5cwLfuwwXdMyly_PugCxdySaiuLQACguUpvk-M52P9Pgigu3cKxbuviy7mhT-bWdGLOo1FLqnHNTYkdY45-aMjL5JNL2i_ZdKNTgNuvseNd4C-uegmY6qXrpnOMO2uSxHe-p9JI2Sy9qo2_K-PWU5Bpp-3IQ6MsuVuSoC_IOWbpWtn9kG6g92FxNq9OyiVLNB6XZ-ozgeilEaelnkSs9lHk3dSt_dWw"
+    
+    uploader = SleepDataUploader(token)
+    
+    # 继续上传剩余文件
+    uploader.auto_upload_batch(batch_size=5)
