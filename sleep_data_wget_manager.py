@@ -71,10 +71,9 @@ class SleepDataWgetManager:
             if token_data:
                 return token_data['access_token']
             else:
-                print("⚠️  Token管理器未找到有效token，尝试从配置文件读取...")
-                # 备用方案：从配置文件读取
-                from dropbox_config import DROPBOX_CONFIG
-                return DROPBOX_CONFIG['access_token']
+                print("⚠️  需要更新Dropbox token")
+                print("运行: python3 token_manager.py auth")
+                return None
                 
         except Exception as e:
             print(f"⚠️  Token管理器加载失败: {e}")
