@@ -1537,3 +1537,64 @@ git push origin main
 ls -la *.txt | grep -E "(group|download|url)"
 find . -name "*group*" -o -name "*url*" -o -name "*link*" | head -10
 python3 sleep_data_manager.py
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 sleep_data_manager_auth.py
+python3 encrypt_sensitive.py
+git add .
+git commit -m "feat: 完整项目上传 - 敏感信息已加密保护
+
+🔐 安全功能:
+- 使用密码1871加密所有敏感信息
+- encrypted_config.json - 加密的Dropbox配置
+- decrypt_sensitive.py - 解密脚本
+- 完整的部署指南和安全说明
+
+📦 完整功能:
+- 所有核心脚本和配置文件
+- 下载链接和状态记录文件
+- 加密/解密工具
+- 详细的部署和使用文档
+
+🚀 即用特性:
+- 克隆后输入密码1871即可部署
+- 自动下载+上传+空间管理
+- 完整的错误处理和重试机制
+- 后台运行支持
+
+密码: 1871"
+git push origin main
+rm -f dropbox_config.txt encrypt_sensitive.py
+git add UNIVERSAL_DEPLOYMENT.md && git commit -m "docs: 添加通用部署指南
+
+🌍 适用于任何环境的部署方案:
+- 快速5分钟部署流程
+- 适配不同文件结构 (list.txt, CSV, JSON等)
+- Docker/虚拟环境/系统服务部署
+- 自定义配置和性能优化
+- 完整的监控和故障排除
+- 一键诊断脚本
+
+🔑 密码: 1871" && git push origin main
+ps aux | grep sleep_data
+pkill -f sleep_data_manager
+wc -l group11.txt not_downloaded.txt
+cp not_downloaded.txt group11.txt
+ps aux | grep -E "(sleep_data|auto_upload)" | grep -v grep
+tail -f nohup.out
+ls -la download/ | head -10 && echo "---" && df -h . | tail -1
+netstat -i | grep -E "(RX|TX)" && echo "---进程网络活动---" && lsof -i | grep python3 | head -5
+watch -n 5 "ls -la download/*.edf 2>/dev/null | wc -l && echo '文件数量变化' && df -h . | tail -1"
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 sleep_data_manager_auth.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 auto_upload_manager.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 sleep_data_manager.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 sleep_data_manager_auth.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 auto_upload_manager.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 sleep_data_manager.py &
+. "/root/.cursor-server/bin/031e7e0ff1e2eda9c1a0f5df67d44053b059c5d0/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+python3 sleep_data_manager_auth.py &
