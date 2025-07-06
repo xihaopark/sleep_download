@@ -1,10 +1,31 @@
-# 下载的数据文件
-download/
-*.edf
-*.tsv
-*.atr
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# 日志和状态文件
+# 敏感配置文件
+dropbox_config.txt
+dropbox_tokens.txt
+
+# 下载和上传记录
+download/
 uploaded_files.txt
 download_success.txt
 failed_downloads.txt
@@ -14,28 +35,22 @@ remaining_complete.txt
 # 临时文件
 *.tmp
 *.log
-*.bak
-
-# Python缓存
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+test_*.py
+get_new_token.py
+update_all_tokens.py
+test_updated_token.py
+prepare_for_github.py
 
 # 系统文件
 .DS_Store
 Thumbs.db
 
-# 压缩包
-*.tar.gz
-*.zip
-
-# 编辑器文件
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# 环境变量文件
-.env
-.env.local 
+# 压缩包
+*.tar.gz
+*.zip

@@ -1,0 +1,41 @@
+# 下载的数据文件
+download/
+*.edf
+*.tsv
+*.atr
+
+# 日志和状态文件
+uploaded_files.txt
+download_success.txt
+failed_downloads.txt
+not_downloaded.txt
+remaining_complete.txt
+
+# 临时文件
+*.tmp
+*.log
+*.bak
+
+# Python缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 压缩包
+*.tar.gz
+*.zip
+
+# 编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 环境变量文件
+.env
+.env.local 

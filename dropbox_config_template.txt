@@ -1,0 +1,7 @@
+# Dropbox配置文件模板
+# 复制此文件为 dropbox_config.txt 并填入你的实际token信息
+
+ACCESS_TOKEN=your_dropbox_access_token_here
+REFRESH_TOKEN=your_dropbox_refresh_token_here
+APP_KEY=your_dropbox_app_key_here
+APP_SECRET=your_dropbox_app_secret_here

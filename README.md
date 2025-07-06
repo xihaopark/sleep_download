@@ -1,177 +1,152 @@
-# Sleep Data Download Manager
+# PhysioNet Sleep Data Download Manager
 
-🚀 **自动化PhysioNet睡眠数据下载和管理系统**
+一个自动化的睡眠数据下载和云存储管理系统，专门用于从PhysioNet数据库下载睡眠相关数据文件并自动上传到Dropbox。
 
-## 📋 项目概述
+## 功能特性
 
-这是一个专为PhysioNet睡眠数据集设计的自动化下载和管理系统，支持：
+- 🔄 **自动下载**: 从PhysioNet自动下载睡眠数据文件
+- ☁️ **云端备份**: 自动上传到Dropbox云存储
+- 💾 **空间管理**: 智能管理本地存储空间，下载后自动清理
+- 📊 **进度跟踪**: 详细的下载和上传进度记录
+- 🔐 **认证管理**: 支持长期有效的Dropbox token
+- 📝 **日志记录**: 完整的操作日志和错误处理
 
-- 🔐 **认证下载**：内置PhysioNet认证信息
-- 📤 **自动上传**：下载完成后自动上传到Dropbox
-- 🔄 **断点续传**：支持网络中断后继续下载
-- 💾 **空间管理**：自动监控磁盘空间，上传后删除本地文件
-- 🧵 **并行处理**：多线程下载和上传
-- 📊 **状态监控**：实时显示进度和统计信息
+## 项目结构
 
-## 🎯 主要特性
+```
+├── sleep_data_manager.py          # 主要的下载管理器
+├── sleep_data_manager_auth.py     # 带认证的高级版本
+├── auto_upload_manager.py         # 自动上传管理器
+├── dropbox_auth_helper.py         # Dropbox认证助手
+├── dropbox_config_template.txt    # 配置文件模板
+├── .env.example                   # 环境变量示例
+├── requirements.txt               # Python依赖
+└── README.md                      # 项目说明
+```
 
-### 智能文件格式支持
-- ✅ 完整URL：`https://physionet.org/files/nch-sleep/3.1.0/Sleep_Data/filename.edf`
-- ✅ 文件名：`filename.edf`（自动添加基础URL）
-- ✅ 混合格式在同一文件中
+## 安装和配置
 
-### 多服务器部署
-- 🖥️ 支持多台服务器并行处理不同数据集
-- 📁 每台服务器处理不同的 `list*.txt` 文件
-- 🔄 自动去重，避免重复下载
-
-## 🚀 快速开始
-
-### 1. 准备工作
+### 1. 安装依赖
 
 ```bash
-# 创建下载目录
-mkdir -p download/
-
-# 将你的列表文件放入download目录
-# 文件名格式：list*.txt (例如：list1.txt, list2.txt)
+pip install -r requirements.txt
 ```
 
-### 2. 列表文件格式
+### 2. 配置Dropbox
 
-你的 `list*.txt` 文件可以包含：
+#### 方法1: 使用配置文件
+```bash
+# 复制模板文件
+cp dropbox_config_template.txt dropbox_config.txt
 
-```
-# 注释行（以#开头会被忽略）
-https://physionet.org/files/nch-sleep/3.1.0/Sleep_Data/16474_18655.edf
-16474_18655.tsv
-16474_18655.atr
-https://physionet.org/files/nch-sleep/3.1.0/Sleep_Data/16477_1246.edf
-16477_1246.tsv
-16477_1246.atr
+# 编辑配置文件，填入你的Dropbox信息
+nano dropbox_config.txt
 ```
 
-### 3. 运行程序
+#### 方法2: 使用环境变量
+```bash
+# 复制环境变量模板
+cp .env.example .env
+
+# 编辑环境变量文件
+nano .env
+```
+
+### 3. 获取Dropbox Token
+
+运行认证助手获取长期有效的token：
 
 ```bash
-# 使用主程序（推荐）
-python3 sleep_data_manager_auth.py
-
-# 或使用自动部署脚本
-chmod +x deploy.sh
-./deploy.sh
+python3 dropbox_auth_helper.py
 ```
 
-## 📁 文件说明
+## 使用方法
 
-### 核心程序文件
-- `sleep_data_manager_auth.py` - 主程序，包含完整认证信息
-- `sleep_data_manager.py` - 基础版本程序
-- `auto_upload_manager.py` - 纯上传管理器
-
-### 文档文件
-- `README.md` - 项目主说明文件
-- `PROJECT_README.md` - 技术详细文档
-- `PROJECT_INTRODUCTION.md` - 用户友好指南
-- `UPDATE_NOTICE.md` - 版本更新说明
-
-### 部署文件
-- `deploy.sh` - 自动部署脚本
-- `.gitignore` - Git忽略文件配置
-
-## 🔧 技术规格
-
-### 系统要求
-- Python 3.6+
-- Linux/Unix系统
-- 网络连接
-
-### 依赖库
+### 基础下载管理器
 ```bash
-pip3 install requests
+python3 sleep_data_manager.py
 ```
 
-### 配置参数
-- **下载线程**：2个并行线程
-- **上传线程**：1个线程
-- **块大小**：100MB（Dropbox分块上传）
-- **超时设置**：300秒
-- **重试次数**：3次（指数退避）
-
-## 📊 功能特性
-
-### 下载功能
-- ✅ HTTP Basic认证
-- ✅ 断点续传支持
-- ✅ 文件完整性验证
-- ✅ 自动重试机制
-- ✅ 磁盘空间监控
-
-### 上传功能
-- ✅ Dropbox分块上传
-- ✅ 大文件支持（>150MB）
-- ✅ 上传后自动删除本地文件
-- ✅ 上传状态记录
-
-### 状态管理
-- ✅ 已下载文件跟踪
-- ✅ 已上传文件记录
-- ✅ 失败任务日志
-- ✅ 实时进度显示
-
-## 🚀 多服务器部署
-
-### 部署步骤
-1. 将 `sleep_data_manager_auth.py` 复制到目标服务器
-2. 在每台服务器上创建 `download/` 目录
-3. 将对应的 `list*.txt` 文件放入各自的 `download/` 目录
-4. 运行 `python3 sleep_data_manager_auth.py`
-
-### 示例部署
+### 带认证的高级版本
 ```bash
-# 服务器1 - 处理list1.txt
-mkdir -p download/
-cp list1.txt download/
-python3 sleep_data_manager_auth.py
-
-# 服务器2 - 处理list2.txt  
-mkdir -p download/
-cp list2.txt download/
 python3 sleep_data_manager_auth.py
 ```
 
-## 📈 监控和日志
-
-程序运行时会显示：
-```
-📊 状态报告 [15:30:45]:
-   下载: 25 个文件 (1250MB)
-   上传: 20 个文件 (1000MB)
-   跳过: 5 个文件
-   失败: 0 个文件
-   磁盘: 75.2% 使用 (12.5GB 可用)
-   队列: 下载 50, 上传 3
+### 自动上传管理器
+```bash
+python3 auto_upload_manager.py
 ```
 
-## 🔒 安全说明
+## 配置说明
 
-- 认证信息已内置在程序中
-- Dropbox访问令牌已配置
-- 所有网络请求使用HTTPS
-- 本地文件在上传后自动删除
+### Dropbox设置
 
-## 🤝 贡献
+1. 访问 [Dropbox App Console](https://www.dropbox.com/developers/apps)
+2. 创建新应用，选择 "Scoped access" 和 "Full Dropbox"
+3. 获取 App Key 和 App Secret
+4. 使用 `dropbox_auth_helper.py` 获取长期token
 
-欢迎提交Issue和Pull Request来改进这个项目。
+### 文件配置
 
-## 📄 许可证
+- `dropbox_config.txt`: Dropbox认证信息
+- `group11.txt`: 下载链接列表
+- `download/`: 本地下载目录
+- `uploaded_files.txt`: 上传成功记录
+- `failed_downloads.txt`: 下载失败记录
+
+## 功能详解
+
+### 智能下载管理
+- 自动检测已下载文件，避免重复下载
+- 支持断点续传
+- 智能重试机制
+
+### 云端同步
+- 下载完成后自动上传到Dropbox
+- 上传成功后自动清理本地文件
+- 保持详细的同步记录
+
+### 空间优化
+- 监控本地磁盘空间
+- 自动清理已上传文件
+- 防止磁盘空间不足
+
+## 故障排除
+
+### Token过期问题
+如果遇到token过期错误：
+
+```bash
+# 重新获取token
+python3 dropbox_auth_helper.py
+
+# 更新所有脚本中的token
+python3 update_all_tokens.py
+```
+
+### 下载失败
+检查网络连接和PhysioNet访问权限。
+
+### 上传失败
+检查Dropbox存储空间和网络连接。
+
+## 贡献指南
+
+1. Fork 本项目
+2. 创建功能分支
+3. 提交更改
+4. 发起 Pull Request
+
+## 许可证
 
 MIT License
 
-## 📞 联系方式
+## 作者
 
-如有问题，请通过GitHub Issues联系。
+Park XiHao
 
----
+## 更新日志
 
-**⚡ 一键部署，自动化处理，让数据下载变得简单！** 
+- v2.0: 添加长期token支持
+- v1.5: 改进错误处理和日志记录
+- v1.0: 初始版本
